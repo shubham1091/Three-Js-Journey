@@ -1,6 +1,16 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import gsap from "gsap";
+import GUI from "lil-gui";
+
+const gui = new GUI({ width: 300, title: "Debug UI", closeFolders: true });
+gui.close();
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "h") {
+    gui.show(gui._hidden);
+  }
+});
 
 /**
  * Base
@@ -14,10 +24,61 @@ const scene = new THREE.Scene();
 /**
  * Object
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
-const material = new THREE.MeshBasicMaterial({ color: "#ff0000" });
+let debugObject = {};
+debugObject.color = "#a778d8";
+let geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
+const material = new THREE.MeshBasicMaterial({ color: debugObject.color });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
+
+const cubeTweaks = gui.addFolder("Cube tweaks");
+
+cubeTweaks.add(material, "wireframe").name("Wireframe");
+cubeTweaks
+  .addColor(debugObject, "color")
+  .name("Color")
+  .onChange(() => {
+    material.color.set(debugObject.color);
+  });
+cubeTweaks.add(mesh.position, "y").min(-2).max(2).step(0.01).name("Elevation");
+
+debugObject.animationId = null;
+debugObject.spin = () => {
+  const id = gsap.to(mesh.rotation, {
+    y: Math.PI * 2,
+    duration: 5,
+    repeat: Infinity,
+  });
+
+  debugObject.animationId = id;
+};
+
+debugObject.stop = () => {
+  debugObject.animationId && debugObject.animationId.kill();
+};
+
+cubeTweaks.add(debugObject, "spin").name("Spin the box");
+cubeTweaks.add(debugObject, "stop").name("Stop the box");
+
+debugObject.subdivisions = 2;
+cubeTweaks
+  .add(debugObject, "subdivisions")
+  .min(1)
+  .max(10)
+  .step(1)
+  .name("Subdivisions")
+  .onFinishChange(() => {
+    geometry.dispose();
+    geometry = new THREE.BoxGeometry(
+      1,
+      1,
+      1,
+      debugObject.subdivisions,
+      debugObject.subdivisions,
+      debugObject.subdivisions
+    );
+    mesh.geometry = geometry;
+  });
 
 /**
  * Sizes
