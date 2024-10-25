@@ -11,8 +11,19 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 // Object
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+// const geometry = new THREE.BoxGeometry(1, 1, 1, 2,2,2);
+
+// const positionArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
+// const positionAttribute = new THREE.BufferAttribute(positionArray, 3);
+// const geometry = new THREE.BufferGeometry();
+// geometry.setAttribute("position", positionAttribute);
+
+const geometry = new THREE.DodecahedronGeometry(1, 1);
+
+const material = new THREE.MeshBasicMaterial({
+  color: 0xff0000,
+  wireframe: true,
+});
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
@@ -57,8 +68,11 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+const clock = new THREE.Clock();
 // Animate
 renderer.setAnimationLoop(() => {
+  const elapsedTime = clock.getElapsedTime();
+  mesh.rotation.y = elapsedTime * 0.25;
   // Update controls
   controls.update();
 
