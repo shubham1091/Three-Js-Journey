@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from "gsap";
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -28,4 +29,41 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.render(scene, camera);
+
+gsap.to(mesh.position, { x: 2, duration: 1, delay: 1 });
+gsap.to(mesh.position, { x: 0, duration: 1, delay: 2 });
+
+gsap.to(mesh.rotation, {
+  y: Math.PI * 2,
+  duration: 5,
+  delay: 1,
+  repeat: Infinity,
+});
+
+//Clock
+const clock = new THREE.Clock();
+// let time = Date.now();
+
+// Animation
+const animate = () => {
+  const elapsedTime = clock.getElapsedTime();
+
+  //   const currentTime = Date.now();
+  //   const deltaTime = currentTime - time;
+  //   time = currentTime;
+  //   mesh.rotation.x = 0.01 * deltaTime;
+
+  //   mesh.rotation.x = elapsedTime * 0.25;
+  //   mesh.position.y = Math.sin(elapsedTime);
+  //   mesh.position.x = Math.cos(elapsedTime);
+
+  renderer.render(scene, camera);
+
+  // console.log("animate");
+  requestAnimationFrame(animate);
+};
+
+// setInterval(() => {
+//     animate();
+// }, 1000);
+animate();
