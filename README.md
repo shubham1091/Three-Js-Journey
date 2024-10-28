@@ -18,19 +18,19 @@ This repository tracks my progress through the Three.js Journey course, which co
 
 This section covers the fundamentals of Three.js, including setting up your first scene, understanding cameras, geometries, materials, and textures. You'll also learn how to animate objects, add a debug panel, and publish your project online.
 
-- [ ] Introduction
-- [ ] What is WebGL and why use Three.js
-- [ ] First Three.js Project
-- [ ] Transform objects
-- [ ] Animations
-- [ ] Cameras
-- [ ] Fullscreen and resizing
-- [ ] Geometries
-- [ ] Debug UI
-- [ ] Textures
-- [ ] Materials
-- [ ] 3D Text
-- [ ] Go live
+- [x] Introduction
+- [x] What is WebGL and why use Three.js
+- [x] First Three.js Project
+- [x] Transform objects
+- [x] Animations
+- [x] Cameras
+- [x] Fullscreen and resizing
+- [x] Geometries
+- [x] Debug UI
+- [x] Textures
+- [x] Materials
+- [x] 3D Text
+- [x] Go live
 
 ## Classic Techniques
 
