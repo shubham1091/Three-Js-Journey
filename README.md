@@ -38,12 +38,12 @@ This section covers the fundamentals of Three.js, including setting up your firs
 
 In this section, you will learn how to illuminate your scene with various lights and shadows, create particles, and animate objects based on scroll events.
 
-- [ ] Lights
-- [ ] Shadows
-- [ ] Haunted House
-- [ ] Particles
-- [ ] Galaxy Generator
-- [ ] Scroll based animation
+- [x] Lights
+- [x] Shadows
+- [x] Haunted House
+- [x] Particles
+- [x] Galaxy Generator
+- [x] Scroll based animation
 
 ## Advanced Techniques
 
