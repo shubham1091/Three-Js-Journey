@@ -26,6 +26,16 @@ dracoLoader.setDecoderPath("/draco/");
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
+let mixer = new THREE.AnimationMixer();
+
+gltfLoader.load("/models/burger.glb", (gltf)=>{
+  mixer = new THREE.AnimationMixer(gltf.scene);
+  gltf.animations.forEach((clip)=>{
+    mixer.clipAction(clip).play();
+  })
+  scene.add(gltf.scene);
+})
+
 
 /**
  * Floor
